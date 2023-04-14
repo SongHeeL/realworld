@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.realworld.user.UserMapper">
+    <insert id="createUser" parameterType="com.example.realworld.user.UserDao" useGeneratedKeys="true" keyProperty="userId" >
+        insert into user(username, email, password)
+        values (#{username}, #{email}, #{password})
+    </insert>
+
+    <update id="updateUser" parameterType="com.example.realworld.user.UserDao">
+        update user
+        set username =#{username}, email = #{email}, password = #{password}, bio = #{bio}, image = #{image}
+    </update>
+
+    <select id="getUser" resultMap="userInfo">
+        select * from user
+    </select>
+
+    <resultMap id="userInfo" type="com.example.realworld.user.UserResponseDTO$ResponseDTO">
+        <id column="user_id" property="userID"/>
+        <result column="username" property="username"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="bio" property="bio"/>
+        <result column="image" property="image"/>
+    </resultMap>
+</mapper>
